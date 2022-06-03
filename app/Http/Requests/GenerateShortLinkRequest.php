@@ -2,10 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\SafeBrowsing;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GenerateShortLinkRequest extends FormRequest
 {
+    /**
+     * Force response json type when validation fails
+     * @var bool
+     */
+
+    //protected $forceJsonResponse = true;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +32,9 @@ class GenerateShortLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => 'required|url|unique:short_links,link'
+            'link' => ['required', 'url', new SafeBrowsing()]
         ];
     }
+
+
 }

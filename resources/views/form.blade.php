@@ -71,7 +71,7 @@
         <form id="GFG" method="POST" action="{{ route('generate.shorten.link.post') }}">
             @csrf
         <div class="searchbar">
-            <input class="search_input" type="text" name="" placeholder="Search...">
+            <input class="search_input" type="text" name="link" placeholder="Search...">
             <a href="#" onclick="myFunction()" class="search_icon"><i class="fas fa-search"></i></a>
         </div>
 

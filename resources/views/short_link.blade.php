@@ -20,7 +20,6 @@
                     </div>
                 </div>
                 @if ($errors->has('link'))
-
                     <div class="input-group err mb-3 alert alert-danger" role="alert">
                         {{ $errors->first('link') }}
                     </div>
@@ -35,6 +34,18 @@
                 </div>
             @endif
 
+            @if (Session::has('warning'))
+                <div class="alert alert-warning">
+                    <p>{{ Session::get('warning') }}</p>
+                </div>
+            @endif
+
+            @if (Session::has('danger'))
+                <div class="alert alert-danger">
+                    <p>{{ Session::get('danger') }}</p>
+                </div>
+            @endif
+
             <table class="table table-bordered table-sm text-center">
                 <thead>
                 <tr>
@@ -45,14 +56,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($shortLinks as $row)
+                @if(isset($short_link))
                     <tr>
-                        <td>{{ $row->id }}</td>
-                        <td><a href="{{ route('shorten.link', $row->code) }}" target="_blank">{{ route('shorten.link', $row->code) }}</a></td>
-                        <td>{{ $row->link }}</td>
-                        <td>{{ $row->created_at }}</td>
+                        <td>{{ $short_link->id }}</td>
+                        <td><a href="{{ route('shorten.link', $short_link->code) }}" target="_blank">{{ route('shorten.link', $short_link->code) }}</a></td>
+                        <td>{{ $short_link->link }}</td>
+                        <td>{{ $short_link->created_at }}</td>
                     </tr>
-                @endforeach
+                @else
+
+                    @foreach($shortLinks as $row)
+                        <tr>
+                            <td>{{ $row->id }}</td>
+                            <td><a href="{{ route('shorten.link', $row->code) }}" target="_blank">{{ route('shorten.link', $row->code) }}</a></td>
+                            <td>{{ $row->link }}</td>
+                            <td>{{ $row->created_at }}</td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
