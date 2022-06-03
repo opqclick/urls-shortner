@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>How to create url shortener using Laravel? - ItSolutionStuff.com</title>
+    <title>URLs Shortner</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        p{
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
 

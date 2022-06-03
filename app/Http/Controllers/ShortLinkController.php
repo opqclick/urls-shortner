@@ -19,6 +19,8 @@ class ShortLinkController extends Controller
     {
         $shortLinks = ShortLink::latest()->get();
 
+        session()->forget('warning');
+
         return view('short_link', compact('shortLinks'));
     }
 
