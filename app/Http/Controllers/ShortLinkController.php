@@ -21,7 +21,7 @@ class ShortLinkController extends Controller
 
         session()->forget('warning');
 
-        return view('short_link', compact('shortLinks'));
+        return view('short_link_vue', compact('shortLinks'));
     }
 
     /**
@@ -37,7 +37,7 @@ class ShortLinkController extends Controller
         if($linkExists){
             Session::flash('warning', 'Link already exists!');
 
-            return view('short_link')->with('short_link', $linkExists);
+            return view('short_link_vue')->with('short_link', $linkExists);
         }
 
         $shortLink = new ShortLink();
