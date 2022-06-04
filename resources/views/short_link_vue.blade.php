@@ -7,7 +7,6 @@
 <body>
     <div id="app">
         <welcome/>
-        @csrf
     </div>
     <script src="{{mix('js/app.js')}}"></script>
 </body>

@@ -21,7 +21,7 @@ class ShortLinkController extends Controller
 
         session()->forget('warning');
 
-        return view('short_link', compact('shortLinks'));
+        return view('short_link_vue', compact('shortLinks'));
     }
 
     /**
