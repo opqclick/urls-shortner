@@ -15,4 +15,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/generate-short-link', [ShortLinkGeneratorController::class, 'store']);
-Route::get('/generate-short-link', [ShortLinkGeneratorController::class, 'store']);
