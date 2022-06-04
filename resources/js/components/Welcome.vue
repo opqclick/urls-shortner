@@ -4,32 +4,65 @@
 
         <div class="card">
             <div class="card-header">
-                <form method="POST" action="{{ route('generate.shorten.link.post') }}">
+                <form method="POST" action="" @submit.prevent = "formSubmit">
 
                     <div class="input-group mb-3">
-                         <input
-                            :value="text"
-                            @input="event => text = event.target.value" class="form-control">
+                         <input type="text" v-model="link" name="link" id="link" placeholder="Paste your URL here.." class="form-control">
 
                         <div class="input-group-append">
-                            <button class="btn btn-success" type="submit">{{btnText}}</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <p>{{version}}</p>
+        <p>{{message}}</p>
+        <p v-if="list != null">
+            <a :href="list.code">{{list.link}}</a>
+        </p>
     </div>
 </template>
 <script>
 import {version} from "vue";
+import axios from "axios";
 
 export default {
     setup: ()=>({
         title: 'URL shortener using Laravel+Vue',
         btnText: 'Generate',
         version: version
-    })
+
+    }),
+    data(){
+        return {
+            link: null,
+            list: null,
+            message: null,
+            baseUrl: window.location.host
+        }
+    },
+    methods: {
+        formSubmit(){
+            this.list = null
+            //console.log(this.link);
+
+            axios.post('/api/generate-short-link', {
+                link: this.link
+            }).then(response => {
+                if (response.data.success){
+                    window.location.href = response.data.response.link
+                }
+
+                this.list = response.data.response
+                this.message = response.data.message
+
+                console.log(response.data);
+            }).catch(error => {
+                console.log(error);
+            })
+
+        }
+    }
 }
 </script>
 <style embed>

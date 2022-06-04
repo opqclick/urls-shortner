@@ -30,7 +30,7 @@ class ShortLinkGeneratorController extends Controller
             if($linkExists){
                 // The response will load on the Frontend with old link
                 // This is the only response that use can see on the HTML page
-                $response = ['success'=>true, 'message'=> 'Your provided link already exists', 'response' => $linkExists];
+                $response = ['success'=>false, 'message'=> 'Your provided link already exists', 'response' => $linkExists];
             }else{
                 $shortLink = new ShortLink();
                 $shortLink->link = $request->link;

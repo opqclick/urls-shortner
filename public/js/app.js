@@ -19581,6 +19581,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
@@ -19589,6 +19592,35 @@ __webpack_require__.r(__webpack_exports__);
       btnText: 'Generate',
       version: vue__WEBPACK_IMPORTED_MODULE_0__.version
     };
+  },
+  data: function data() {
+    return {
+      link: null,
+      list: null,
+      message: null,
+      baseUrl: window.location.host
+    };
+  },
+  methods: {
+    formSubmit: function formSubmit() {
+      var _this = this;
+
+      this.list = null; //console.log(this.link);
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/generate-short-link', {
+        link: this.link
+      }).then(function (response) {
+        if (response.data.success) {
+          window.location.href = response.data.response.link;
+        }
+
+        _this.list = response.data.response;
+        _this.message = response.data.message;
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -19617,36 +19649,51 @@ var _hoisted_3 = {
   "class": "card-header"
 };
 var _hoisted_4 = {
-  method: "POST",
-  action: "{{ route('generate.shorten.link.post') }}"
-};
-var _hoisted_5 = {
   "class": "input-group mb-3"
 };
-var _hoisted_6 = ["value"];
-var _hoisted_7 = {
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "input-group-append"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "btn btn-success"
+}, "Submit")], -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  key: 0
 };
-var _hoisted_8 = {
-  "class": "btn btn-success",
-  type: "submit"
-};
+var _hoisted_7 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    value: _ctx.text,
-    onInput: _cache[0] || (_cache[0] = function (event) {
-      return _ctx.text = event.target.value;
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    method: "POST",
+    action: "",
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.formSubmit && $options.formSubmit.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.link = $event;
     }),
+    name: "link",
+    id: "link",
+    placeholder: "Paste your URL here..",
     "class": "form-control"
-  }, null, 40
-  /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.btnText), 1
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.link]]), _hoisted_5])], 32
+  /* HYDRATE_EVENTS */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
   /* TEXT */
-  )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.version), 1
-  /* TEXT */
-  )]);
+  ), $data.list != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: $data.list.code
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.list.link), 9
+  /* TEXT, PROPS */
+  , _hoisted_7)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
