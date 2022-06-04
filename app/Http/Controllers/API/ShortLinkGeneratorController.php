@@ -28,6 +28,8 @@ class ShortLinkGeneratorController extends Controller
             $linkExists = ShortLink::where('link', $request->link)->first();
 
             if($linkExists){
+                // The response will load on the Frontend with old link
+                // This is the only response that use can see on the HTML page
                 $response = ['success'=>true, 'message'=> 'Your provided link already exists', 'response' => $linkExists];
             }else{
                 $shortLink = new ShortLink();
@@ -35,6 +37,8 @@ class ShortLinkGeneratorController extends Controller
                 $shortLink->code = Str::random(6);
                 $shortLink->save();
 
+                // By using this response information,
+                // User will be redirected to the given link.
                 $response = ['success'=>true, 'message'=> 'New short link created and link is verified by Google safe browsing API v4', 'response' => $shortLink];
             }
         }
