@@ -17,8 +17,9 @@
             </div>
         </div>
         <p>{{message}}</p>
+
         <p v-if="list != null">
-            <a :href="list.code">{{list.link}}</a>
+            <a :href="list.code"><b>{{baseUrl + '/' +list.code}}</b></a> &nbsp; || &nbsp; <a :href="list.link">{{list.link}}</a>
         </p>
     </div>
 </template>

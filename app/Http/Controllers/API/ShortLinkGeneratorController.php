@@ -16,6 +16,7 @@ class ShortLinkGeneratorController extends Controller
 
         //dd($response);
 
+        //SafeBrowsing custom rule will go through the Google safeBrowing API v4
         $validator = Validator::make($request->all(), [
             'link' => ['required', 'url', new SafeBrowsing()]
         ]);
